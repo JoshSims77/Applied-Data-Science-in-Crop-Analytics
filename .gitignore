@@ -1,2 +1,6 @@
 venv/
 /soybean_app/data/sample_uploads
+*.csv
+/soybean_app/data/processed
+/soybean_app/data/raw
+/soybean_app/data/raw_discards
