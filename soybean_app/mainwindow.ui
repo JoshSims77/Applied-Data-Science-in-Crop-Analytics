@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>979</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #121212;   /* Very dark gray */
+    color: #ffffff;              /* Default text color for child widgets */
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="UploadButton">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>140</y>
+      <width>361</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>-1</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="acceptDrops">
+     <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #1a1a1a;       /* Dark background */
+    color: #ffffff;                 /* White text */
+    border: none;
+    border-radius: 12px;            /* Rounded corners */
+    padding: 8px 16px;
+    font-size: 14px;
+    qproperty-wordWrap: true;       /* Enable text wrapping */
+    text-align: center;             /* Horizontal text alignment */
+}
+
+QPushButton:hover {
+    background-color: #333333;      /* Slightly lighter on hover */
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Upload John Deere PDF</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>assets/icons/uploadpdf.png</normaloff>assets/icons/uploadpdf.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>40</width>
+      <height>40</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ContinueButton">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>460</y>
+      <width>231</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>-1</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #1a1a1a;       /* Dark background */
+    color: #ffffff;                 /* White text */
+    border: none;
+    border-radius: 12px;            /* Rounded corners */
+    padding: 8px 16px;
+    font-size: 14px;
+    qproperty-wordWrap: true;       /* Enable text wrapping */
+    text-align: center;             /* Horizontal text alignment */
+}
+
+QPushButton:hover {
+    background-color: #333333;      /* Slightly lighter on hover */
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Continue to Dashboard</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>40</width>
+      <height>40</height>
+     </size>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>979</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuUCM_Farms_Soybean_Research">
+    <property name="title">
+     <string>UCM Farms - Soybean Research</string>
+    </property>
+   </widget>
+   <addaction name="menuUCM_Farms_Soybean_Research"/>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
