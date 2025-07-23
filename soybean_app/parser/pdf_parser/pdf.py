@@ -3,6 +3,10 @@
 
 import re
 import pdfplumber
+import json
+import shutil
+from pathlib import Path
+from save_to_csv import save_to_csv
 
 #TODO: setup folder to pull uploads from, not just static location
 #TODO: extract into dataframe to be put in a db? -- talk to Dr. Lee about this
@@ -11,6 +15,10 @@ import pdfplumber
 
 #temp location to make sure it works
 loc = r"C:\Users\jsimp\OneDrive\Documents\GitHub\Applied-Data-Science-in-Crop-Analytics\soybean_app\data\sample_uploads\Northwest Hill Overview Seeding (2).pdf"
+
+# Folder paths
+RAW_DIR = Path("soybean_app/data/raw")
+DISCARDS_DIR = Path("soybean_app/data/raw_discards")
 
 #print all text to console
 def dump(text):
@@ -60,17 +68,42 @@ def print_extracted_data(data):
             
 
 
+def process_pdf_file(pdf_path: Path):
+    with pdfplumber.open(pdf_path) as pdf:
+        text = pdf.pages[0].extract_text().replace('\n', ' ')
+        extracted = extract_farm_data(text)
+
+    # Save data to CSV
+    save_to_csv(extracted)
+
+    # create our discard subfolder for the newly processed pdf
+    discard_folder = DISCARDS_DIR / pdf_path.stem
+    discard_folder.mkdir(parents=True, exist_ok=True)
+
+    # Save extracted data as JSON
+    json_path = discard_folder / f"{pdf_path.stem}.json"
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(extracted, f, indent=2)
+
+    # Move the original PDF to its discard subfolder
+    shutil.move(str(pdf_path), str(discard_folder / pdf_path.name))
+
+    print(f"Processed and archived: {pdf_path.name}")
+
+
 def main():
-    with pdfplumber.open(loc) as pdf:
-        page = pdf.pages[0]
-        text = page.extract_text()
-        text = text.replace('\n', ' ')
+    pdf_files = list(RAW_DIR.glob("*.pdf"))
 
-        dump(text) #pdf text content
-        data = extract_farm_data(text) #clean it
-        print_extracted_data(data) #display it
+    if not pdf_files:
+        print("No PDF files currently found in raw/.")
+        return
 
-        page.close()
+    for pdf_path in pdf_files:
+        try:
+            process_pdf_file(pdf_path)
+        except Exception as e:
+            print(f"unable to process {pdf_path.name}: {e}")
 
-main()
 
+if __name__ == "__main__":
+    main()
